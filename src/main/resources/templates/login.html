@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Please Log In</title>
+</head>
+<body>
+    <h1>Please Log In</h1>
+    
+    <!-- Display error messages -->
+    <div th:if="${param.error}">
+        Invalid username and password.
+    </div>
+    <div th:if="${param.logout}">
+        You have been logged out.
+    </div>
+
+    <!-- Login form -->
+    <form th:action="@{/login}" method="post">
+        <!-- Hidden input to include CSRF token -->
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+        
+        <div>
+            <input type="text" name="username" placeholder="Username" />
+        </div>
+        <div>
+            <input type="password" name="password" placeholder="Password" />
+        </div>
+        <input type="submit" value="Log in" />
+    </form>
+    
+
+    <hr />
+
+    <!-- OAuth login options -->
+    <div>
+        <a href="/oauth2/authorization/github">Login with GitHub</a>
+    </div>
+    <div>
+        <a href="/oauth2/authorization/google">Login with Google</a>
+    </div>
+
+    <hr />
+
+    <!-- Sign Up option -->
+    <div>
+        <p>Don't have an account? <a href="/signup">Sign up here</a></p>
+    </div>
+</body>
+</html>
