@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Verify OTP</title>
+</head>
+<body>
+    <h1>Verify OTP</h1>
+    
+    <form th:action="@{/verify-email}" method="get">
+        <input type="hidden" name="email" th:value="${email}" />
+        <div>
+            <input type="text" name="otp" placeholder="Enter OTP" required="required"/>
+        </div>
+        <input type="submit" value="Verify"/>
+    </form>
+
+    <div th:if="${error != null}">
+        <p style="color: red;" th:text="${error}"></p>
+    </div>
+</body>
+</html>

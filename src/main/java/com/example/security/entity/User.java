@@ -29,6 +29,8 @@ public class User {
 
     private String password;
 
+    private boolean enabled;
+
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<String> roles; 
 

@@ -29,7 +29,7 @@ public class SecurityConfig {
         http
             .csrf(Customizer.withDefaults())
             .authorizeHttpRequests(authorize -> authorize
-                    .requestMatchers("/signup", "/register", "/css/**", "/js/**")
+                    .requestMatchers("/signup", "/register","/verify-otp","/verify-email" ,"/css/**", "/js/**")
                     .permitAll()
                     .anyRequest().authenticated())
             .formLogin(form -> form

@@ -1,5 +1,6 @@
 package com.example.security.service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -26,6 +27,18 @@ public class UserService implements UserDetailsService {
         this.passwordEncoder = passwordEncoder;
     }
 
+    public void updateUserEmailVerified(User user) {
+         String userId = user.getUserId(); 
+         userRepo.updateUserEnabled(userId, true);
+         userRepo.setRoleToUserByUserId(userId,"USER"); 
+    }
+
+
+    public User saveUserWithRoles(User user){
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        return userRepo.save(user);
+    }
+
     public User saveUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRoles(Set.of("USER"));
@@ -48,5 +61,17 @@ public class UserService implements UserDetailsService {
                 user.getPassword(),
                 authorities);
     }
+
+    public User getUserByEmail(String email) {
+        return userRepo.findByEmail(email);
+    }
+
+    public boolean checkIfEmailExists(String email) {
+        return userRepo.existsByEmail(email); 
+       }
+
+    public boolean checkIfUsernameExists(String username) {
+        return userRepo.existsByUsername(username) ; 
+       }
 
 }

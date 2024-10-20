@@ -14,6 +14,8 @@ public class HomeController {
         SecurityContext context = SecurityContextHolder.getContext();
         return context;  
     }
+
+    
     
 
 }
